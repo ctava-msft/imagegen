@@ -61,7 +61,7 @@ This application demonstrates the following concepts and how to implement them:
 
   #### Vector search Preview details
 
-  This lab utilizes a preview feature, **Vector search for Azure Cosmos DB for NoSQL** which requires preview feature registration. Follow the below steps to register. You must be enrolled before you can deploy this solution:
+  This proejct utilizes a preview feature, **Vector search for Azure Cosmos DB for NoSQL** which requires preview feature registration. Follow the below steps to register. You must be enrolled before you can deploy this solution:
 
   1. Navigate to your Azure Cosmos DB for NoSQL resource page.
   1. Select the "Features" pane under the "Settings" menu item.
@@ -97,7 +97,6 @@ If you're not using one of the above options for opening the project, then you'l
 
 1. Make sure the following tools are installed:
 
-    * [.NET 8](https://dotnet.microsoft.com/downloads/)
     * [Git](https://git-scm.com/downloads)
     * [Azure Developer CLI (azd)](https://aka.ms/install-azd)
     * [VS Code](https://code.visualstudio.com/Download) or [Visual Studio](https://visualstudio.microsoft.com/downloads/)
@@ -111,7 +110,21 @@ If you're not using one of the above options for opening the project, then you'l
 
 3. If you're using Visual Studio, open the src/cosmos-copilot.sln solution file. If you're using VS Code, open the src folder.
 
-7. Continue with the [deploying steps](#deployment).
+4. Continue with the [deploying steps](#deployment).
+
+5. Additional Steps
+
+```
+azd auth login
+azd up
+
+az cosmosdb sql role assignment create \
+    --account-name "cosmos-3hx4fjcmtgd4a" \
+    --resource-group "rg-cosmodb-lab" \
+    --scope "/" \
+    --principal-id $(az ad signed-in-user show --query id -o tsv) \
+    --role-definition-id "00000000-0000-0000-0000-000000000002"
+```
 
 ### VS Code Dev Containers
 
