@@ -5,8 +5,8 @@ metadata:
   template: cosmos-copilot
 services:
   web:
-    project: ./src/cosmos-copilot.WebApp/cosmos-copilot.WebApp.csproj
-    language: csharp
+    project: ./src/run.py
+    language: python
     host: appservice
 hooks:
   preprovision:
@@ -39,7 +39,11 @@ hooks:
             'Chat:CacheSimilarityScore' = $env:AZURE_CHAT_CACHE_SIMILARITY_SCORE
             'Chat:ProductMaxResults' = $env:AZURE_CHAT_PRODUCT_MAX_RESULTS
         }
-        $userSecrets | ConvertTo-Json | dotnet user-secrets set --project ./src/cosmos-copilot.WebApp/cosmos-copilot.WebApp.csproj
+        echo $userSecrets | python -c "import json, sys
+        secrets = json.load(sys.stdin)
+        with open('./src/.env', 'w') as f:
+            for key, value in secrets.items():
+                f.write(f'{key}={value}\n')"
       shell: pwsh
       continueOnError: false
       interactive: true
@@ -61,7 +65,10 @@ hooks:
             --arg chatCacheSimilarityScore $AZURE_CHAT_CACHE_SIMILARITY_SCORE \
             --arg chatProductMaxResults $AZURE_CHAT_PRODUCT_MAX_RESULTS \
             '{"OpenAi:Endpoint":$openAiEndpoint,"OpenAi:CompletionDeploymentName":$openAiCompletionDeploymentName,"OpenAi:EmbeddingDeploymentName":$openAiEmbeddingDeploymentName,"OpenAi:MaxRagTokens":$openAiMaxRagTokens,"OpenAi:MaxContextTokens":$openAiMaxContextTokens,"CosmosDb:Endpoint":$cosmosDbEndpoint,"CosmosDb:Database":$cosmosDbDatabase,"CosmosDb:ChatContainer":$cosmosDbChatContainer,"CosmosDb:CacheContainer":$cosmosDbCacheContainer,"CosmosDb:ProductContainer":$cosmosDbProductContainer,"CosmosDb:ProductDataSourceURI":$cosmosDbProductDataSourceURI,"Chat:MaxContextWindow":$chatMaxContextWindow,"Chat:CacheSimilarityScore":$chatCacheSimilarityScore,"Chat:ProductMaxResults":$chatProductMaxResults}')
-        echo $userSecrets | dotnet user-secrets set --project ./src/cosmos-copilot.WebApp/cosmos-copilot.WebApp.csproj
+        echo $userSecrets | python -c "import json, sys; secrets = json.load(sys.stdin)
+        with open('./env', 'w') as f:
+            for key, value in secrets.items():
+                f.write(f'{key}={value}\n')"
       shell: sh
       continueOnError: false
       interactive: true

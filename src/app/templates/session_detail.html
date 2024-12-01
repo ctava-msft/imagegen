@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Detail</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("message-form").addEventListener("submit", async function (event) {
+                    event.preventDefault(); // Prevent the default form submission behavior
+
+                    const prompt = document.getElementById("prompt").value; // Get the value from the textarea
+
+                    // Check if the prompt is not empty
+                    if (!prompt.trim()) {
+                        alert("Please enter a prompt");
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(
+                            "{{ url_for('app.generate_response', session_id=session_id) }}",
+                            {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    user_input: prompt, // Send prompt as part of JSON body
+                                }),
+                            }
+                        );
+
+                        const data = await response.json();
+                        console.log(data.response);
+
+                        // Append the new message to the chat window
+                        const chatSession = document.getElementById("chat-session");
+                        const userMessage = document.createElement("li");
+                        userMessage.className = "message user";
+                        userMessage.innerHTML = `<div class="content"><p>${prompt}</p></div>`;
+                        chatSession.appendChild(userMessage);
+
+                        const assistantMessage = document.createElement("li");
+                        assistantMessage.className = "message assistant";
+                        assistantMessage.innerHTML = `<div class="content"><p>${data.response}</p></div>`;
+                        chatSession.appendChild(assistantMessage);
+
+                        // Clear the input field
+                        document.getElementById("prompt").value = "";
+
+                        // Function to format raw text with ** markers for bold
+                        function formatRawText(rawText) {
+                            // Replace **text** with <strong>text</strong> for bold formatting
+                            return rawText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                        }
+
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                });
+        });
+    </script>
+</head>
+<body>
+    <h1>Welcome to the Python CosmosDB ChatGPT</h1>
+    <div class="container">
+        <div class="chat-window">
+            <h2>Chat Session</h2>
+            <ul id="chat-session" class="message-list">
+                {% for message in session.messages %}
+                <li class="message user">
+                    <div class="content">
+                        <p>{{ message.prompt }}</p>
+                    </div>
+                </li>
+                <li class="message assistant">
+                    <div class="content">
+                        <p>{{ message.completion }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <form id="message-form">
+            <textarea id="prompt" placeholder="Enter your prompt"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cache Detail</title>
+</head>
+<body>
+    <h1>Cache Detail</h1>
+    {% if cache_item %}
+        <p><strong>Cache Item ID:</strong> {{ cache_item.id }}</p>
+        <p><strong>Prompts:</strong> {{ cache_item.prompts }}</p>
+        <p><strong>Completion:</strong> {{ cache_item.completion }}</p>
+        <p><strong>Vectors:</strong> {{ cache_item.vectors }}</p>
+    {% else %}
+        <p>No cache item found.</p>
+    {% endif %}
+    <a href="{% url 'index' %}">Back to Home</a>
+</body>
+</html>
