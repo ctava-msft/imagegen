@@ -4,7 +4,7 @@ azd env get-values > .env
 
 # Load variables from .env file into your shell
 if [ -f .env ]; then
-    source ../../.azure/cosmosdb-nosql-copilot/.env
+    source ../../.azure/imagegen/.env
 else
     echo ".env file not found!"
     exit 1

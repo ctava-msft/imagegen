@@ -19,8 +19,8 @@ description: Build a Copilot app using Azure Cosmos DB for NoSQL, Azure OpenAI S
 
 # Build a Copilot app using Azure Cosmos DB for NoSQL, Azure OpenAI Service, Azure App Service and Semantic Kernel
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/AzureCosmosDB/cosmosdb-nosql-copilot)
-[![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/AzureCosmosDB/cosmosdb-nosql-copilot)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ctava-msft/imagegen)
+[![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/ctava-msft/imagegen))
 
 This sample application shows how to build a multi-tenant, multi-user, Generative-AI RAG Pattern application using Azure Cosmos DB for NoSQL with its new vector database capabilities with Azure OpenAI Service on Azure App Service. This sample shows both using Native SDKs as well as Semantic Kernel integration. The sample provides practical guidance on many concepts you will need to design and build these types of applications.
 
@@ -42,7 +42,7 @@ This application demonstrates the following concepts and how to implement them:
 
 ### Architecture Diagram
 
-![Architecture Diagram](./media/cosmos-nosql-copilot-diagram.png)
+![Architecture Diagram](./media/diagram.png)
 
 ### User Experience
 
@@ -86,7 +86,7 @@ You can run this template virtually by using GitHub Codespaces. The button will 
 
 1. Open the template (this may take several minutes):
 
-    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/AzureCosmosDB/cosmosdb-nosql-copilot)
+    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ctava-msft/imagegen)
 
 2. Open a terminal window
 3. Continue with the [deploying steps](#deployment)
@@ -105,7 +105,7 @@ If you're not using one of the above options for opening the project, then you'l
 2. Download the project code:
 
     ```shell
-    azd init -t cosmosdb-nosql-copilot
+    azd init -t imagegen
     ```
 
 3. If you're using Visual Studio, open the src/cosmos-copilot.sln solution file. If you're using VS Code, open the src folder.
@@ -133,7 +133,7 @@ A related option is VS Code Dev Containers, which will open the project in your 
 1. Start Docker Desktop (install it if not already installed)
 2. Open the project:
 
-    [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/AzureCosmosDB/cosmosdb-nosql-copilot)
+    [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/ctava-msft/imagegen)
 
 3. In the VS Code window that opens, once the project files show up (this may take several minutes), open a terminal window.
 
@@ -146,7 +146,7 @@ A related option is VS Code Dev Containers, which will open the project in your 
 1. Run the following command to download the solution locally to your machine:
 
    ```bash
-   azd init -t AzureCosmosDB/cosmosdb-nosql-copilot
+   azd init -t ctava-msft/imagegen
    ```
 
 1. From the terminal, navigate to the /infra directory in this solution.

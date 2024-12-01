@@ -36,7 +36,7 @@ var abbreviations = loadJsonContent('abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 var tags = {
   'azd-env-name': environmentName
-  repo: 'https://github.com/AzureCosmosDB/cosmosdb-nosql-copilot'
+  repo: 'https://github.com/ctava-msft/imagegen'
 }
 
 var chatSettings = {
